@@ -34,7 +34,7 @@ function generateQRCode(text) {
 function printQRCode(canvas) {
   // Open a new window to print the QR code
   const printWindow = window.open('', '', 'width=600,height=600');
-  
+
   // Check if the window opened correctly
   if (!printWindow) {
     alert("Popup blocked. Please allow popups for this site.");
@@ -47,7 +47,7 @@ function printQRCode(canvas) {
   printWindow.document.write('</head><body>');
   printWindow.document.write('<h3>QR Code</h3>');
   
-  // Append the canvas to the print window (clone it to avoid manipulation issues)
+  // Append the canvas directly to the print window (no cloning, just insert directly)
   const canvasClone = canvas.cloneNode(true);
   printWindow.document.body.appendChild(canvasClone);
 
@@ -56,7 +56,7 @@ function printQRCode(canvas) {
 
   // Wait for the window to load the content before printing
   printWindow.onload = function () {
-    console.log("Printing QR code...");
+    console.log("Canvas loaded in print window. Triggering print...");
     printWindow.print();
     printWindow.close();  // Close the print window after printing
   };
