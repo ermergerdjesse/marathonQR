@@ -3,22 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QR Code Generator and Printer</title>
-  <link rel="stylesheet" href="style.css">
+  <title>QR Code Printer</title>
+  <!-- QR Code Generator Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    #qr-code {
+      margin-top: 20px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>QR Code Generator</h1>
-    <label for="qr-input">Enter text or URL to generate QR code:</label><br><br>
-    <input type="text" id="qr-input" placeholder="Enter text or URL" style="width: 80%; padding: 10px;">
-    <br><br>
-    <button id="generate-btn" style="padding: 10px 20px; cursor: pointer;">Generate QR Code</button>
-    
-    <div id="qr-code"></div>
-  </div>
+  <h1>QR Code Generator and Printer</h1>
+  <input type="text" id="qr-input" placeholder="Enter text or URL for QR code">
+  <button id="generate-btn">Generate QR Code</button>
+  
+  <!-- Container for the QR Code -->
+  <div id="qr-code"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
