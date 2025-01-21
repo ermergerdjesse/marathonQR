@@ -19,4 +19,20 @@ body {
     margin: 20px;
     border: 1px solid #ccc;
   }
-  
+
+  @media print {
+    body * {
+      visibility: hidden; /* Hide all elements */
+    }
+
+    #qr-code, #qr-code * {
+      visibility: visible; /* Show only the QR code */
+    }
+
+    #qr-code {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
