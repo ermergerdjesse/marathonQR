@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  #qr-code {
+    margin-top: 20px;
+    display: inline-block;
+  }
+  
+  #qr-code canvas {
+    margin: 20px;
+    border: 1px solid #ccc;
+  }
+  
