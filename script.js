@@ -35,22 +35,35 @@ function printQRCode(canvas) {
   // Convert the canvas to a Data URL (base64 image)
   const imageUrl = canvas.toDataURL();
 
-  // Open a new window to print the QR code
-  const printWindow = window.open('', '', 'width=600,height=600');
+  // Create a hidden iframe to embed the QR code
+  const iframe = document.createElement('iframe');
+  iframe.style.position = 'absolute';
+  iframe.style.width = '0px';
+  iframe.style.height = '0px';
+  iframe.style.border = 'none';
+  document.body.appendChild(iframe);  // Append iframe to the body
 
-  // Check if the window opened correctly
-  if (!printWindow) {
-    alert("Popup blocked. Please allow popups for this site.");
-    return;
-  }
+  // Open the iframe's document and write HTML content
+  const iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write('<html><head><title>Print QR Code</title>');
+  iframeDocument.write('<style>body { font-family: Arial, sans-serif; text-align: center; }</style>');
+  iframeDocument.write('</head><body>');
+  iframeDocument.write('<h3>QR Code</h3>');
+  iframeDocument.write('<img src="' + imageUrl + '" style="max-width: 100%; height: auto;" />');
+  iframeDocument.write('</body></html>');
+  iframeDocument.close();
 
-  // Write basic HTML content to the print window
-  printWindow.document.write('<html><head><title>Print QR Code</title>');
-  printWindow.document.write('<style>body { font-family: Arial, sans-serif; text-align: center; }</style>');
-  printWindow.document.write('</head><body>');
-  printWindow.document.write('<h3>QR Code</h3>');
-  
-  // Insert the image (QR code) into the print window
-  printWindow.document.write('<img src="' + imageUrl + '" style="max-width: 100%; height: auto;" />');
-  
-  pri
+  // Wait for the iframe content to load, then trigger the print dialog
+  iframe.onload = function () {
+    console.log('QR code loaded in iframe. Triggering print...');
+    iframe.contentWindow.print();  // Trigger the print dialog
+    iframe.contentWindow.onafterprint = function() {
+      console.log("Printing complete.");
+      document.body.removeChild(iframe);  // Clean up by removing the iframe after printing
+    };
+  };
+
+  // Timeout fallback if iframe load event fails to fire
+  setTimeout(function() {
+    console.error("Iframe content loading failed. Tr
