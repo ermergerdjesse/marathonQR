@@ -6,8 +6,9 @@ const qrCodeDiv = document.getElementById('qr-code');
 function generateQRCode(text) {
   qrCodeDiv.innerHTML = ''; // Clears the previous persons information
 
+// It will not work if no text is entered so no sequence number is randomly created
   if (!text) {
-    alert('No text entered, please input text to generate Foil QR Codes');
+    alert('NO TEXT ENTERED, PLEASE ADD TEXT FOR FOIL STAMPER');
     return;
   }
 
