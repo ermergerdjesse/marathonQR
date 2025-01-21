@@ -7,9 +7,6 @@ project {
     color: #c60000;
     font-weight: bold;
   }
-  <h1>Marathon Press</h1>
-  <input type="text" id="qr-input" placeholder="Enter text or URL for QR code">
-  <button id="generate-btn">Generate QR Code</button>
   
   .container {
     width: 100%;
