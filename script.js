@@ -4,17 +4,29 @@ const qrCodeDiv = document.getElementById('qr-code');
 
 // Function to generate the QR code
 function generateQRCode(text) {
-  qrCodeDiv.innerHTML = '';  // Clear any previous QR code
+  // Clear any previous QR code
+  qrCodeDiv.innerHTML = '';
 
-  QRCode.toCanvas(qrCodeDiv, text, { width: 200, height: 200 }, function (error) {
+  // Check if the input is empty
+  if (!text) {
+    alert('Please enter some text or URL.');
+    return;
+  }
+
+  // Create a new canvas element for QR code
+  const canvas = document.createElement('canvas');
+  qrCodeDiv.appendChild(canvas);  // Append the canvas to the div
+
+  // Generate the QR code on the canvas
+  QRCode.toCanvas(canvas, text, { width: 200, height: 200 }, function (error) {
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
-    } else {
-      console.log('QR code generated!');
-      // Automatically trigger the print dialog
-      printQRCode();
+      return;
     }
+    console.log('QR code generated!');
+    // Automatically trigger the print dialog
+    printQRCode();
   });
 }
 
@@ -30,7 +42,7 @@ function printQRCode() {
     printWindow.document.write(canvas.outerHTML);  // Add the QR code canvas to the print window
     printWindow.document.write('</div></body></html>');
     printWindow.document.close();
-    
+
     // Wait a bit for the window to load, then print
     printWindow.onload = function () {
       printWindow.print();
@@ -44,9 +56,5 @@ function printQRCode() {
 // Event listener for generating the QR code
 generateBtn.addEventListener('click', function () {
   const inputText = qrInput.value.trim();
-  if (inputText) {
-    generateQRCode(inputText);
-  } else {
-    alert('Please enter some text or URL.');
-  }
+  generateQRCode(inputText);
 });
