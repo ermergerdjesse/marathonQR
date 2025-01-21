@@ -35,35 +35,31 @@ function printQRCode(canvas) {
   // Convert the canvas to a Data URL (base64 image)
   const imageUrl = canvas.toDataURL();
 
-  // Create a hidden iframe to embed the QR code
-  const iframe = document.createElement('iframe');
-  iframe.style.position = 'absolute';
-  iframe.style.width = '0px';
-  iframe.style.height = '0px';
-  iframe.style.border = 'none';
-  document.body.appendChild(iframe);  // Append iframe to the body
+  // Create an image element to embed on the page
+  const img = document.createElement('img');
+  img.src = imageUrl;
+  img.style.maxWidth = '100%';  // Ensure it scales properly for printing
+  img.style.height = 'auto';
 
-  // Open the iframe's document and write HTML content
-  const iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write('<html><head><title>Print QR Code</title>');
-  iframeDocument.write('<style>body { font-family: Arial, sans-serif; text-align: center; }</style>');
-  iframeDocument.write('</head><body>');
-  iframeDocument.write('<h3>QR Code</h3>');
-  iframeDocument.write('<img src="' + imageUrl + '" style="max-width: 100%; height: auto;" />');
-  iframeDocument.write('</body></html>');
-  iframeDocument.close();
+  // Clear the previous content and append the new image for printing
+  const printDiv = document.createElement('div');
+  printDiv.style.textAlign = 'center';  // Center the QR code
+  printDiv.appendChild(img);
+  
+  // Append the div with the image to the body
+  document.body.appendChild(printDiv);
 
-  // Wait for the iframe content to load, then trigger the print dialog
-  iframe.onload = function () {
-    console.log('QR code loaded in iframe. Triggering print...');
-    iframe.contentWindow.print();  // Trigger the print dialog
-    iframe.contentWindow.onafterprint = function() {
-      console.log("Printing complete.");
-      document.body.removeChild(iframe);  // Clean up by removing the iframe after printing
-    };
+  // Trigger the print dialog
+  window.print();
+
+  // Clean up the DOM after printing
+  window.onafterprint = function () {
+    document.body.removeChild(printDiv);  // Remove the printed content
   };
+}
 
-  // Timeout fallback if iframe load event fails to fire
-  setTimeout(function() {
-    console.error("Iframe content loading failed. Tr
+// Event listener for generating the QR code
+generateBtn.addEventListener('click', function () {
+  const inputText = qrInput.value.trim();
+  generateQRCode(inputText);
+});
