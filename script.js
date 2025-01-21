@@ -17,10 +17,10 @@ function generateQRCode(text) {
   QRCode.toCanvas(canvas, text, { width: 200, height: 200 }, function (error) {
     if (error) {
       console.error('Error generating QR Code:', error);
-      alert('Failed to generate QR code.');
+      alert('Failed to generate - Ask Jesse');
       return;
     }
-    console.log('QR code generated!');
+    console.log('Foil Stamper QR Generated');
     printQRCode(canvas); // Calls the print fuction to auto pop-up print properties/windows pop-up
   });
 }
@@ -61,7 +61,7 @@ function printQRCode(canvas) {
 
 // Event listener for QR generation
 generateBtn.addEventListener('click', function () {
-  console.log("Button clicked!");
+  console.log("Generate QR Button Clicked");
   const inputText = qrInput.value.trim();
   generateQRCode(inputText);
 });
