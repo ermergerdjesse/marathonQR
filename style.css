@@ -26,11 +26,11 @@ project {
 
   @media print {
     body * {
-      visibility: hidden; /* Hide all elements */
+      visibility: hidden; /* Hides all useless stuff on print preview */
     }
 
     #qr-code, #qr-code * {
-      visibility: visible; /* Show only the QR code */
+      visibility: visible; /* Shows only the QR code while printing out */
     }
 
     #qr-code {
