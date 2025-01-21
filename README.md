@@ -1,3 +1,5 @@
+https://ermergerdjesse.github.io/marathonQR/
+
 Rough Draft,
 Create something that inputs text and generates QR code to print labels to stick on books
 
