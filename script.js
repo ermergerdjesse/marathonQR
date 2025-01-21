@@ -7,7 +7,7 @@ function generateQRCode(text) {
   qrCodeDiv.innerHTML = ''; // Clears the previous persons information
 
   if (!text) {
-    alert('Please enter some text or URL.');
+    alert('No text entered, please input text to generate Foil QR Codes');
     return;
   }
 
@@ -28,7 +28,7 @@ function generateQRCode(text) {
 // Function that prints the QR code only, without having Marathon Press Generator or other items from the site
 function printQRCode(canvas) {
   const imageUrl = canvas.toDataURL();
-  const printWindow = window.open('', '', 'width=600,height=600');
+  const printWindow = window.open('', '', 'width=400,height=400');
   printWindow.document.write(`
     <html>
       <head>
