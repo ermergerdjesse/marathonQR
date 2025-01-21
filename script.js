@@ -26,31 +26,31 @@ function generateQRCode(text) {
     }
     console.log('QR code generated!');
     // Automatically trigger the print dialog
-    printQRCode();
+    printQRCode(canvas);
   });
 }
 
 // Function to print the QR code
-function printQRCode() {
-  const canvas = qrCodeDiv.querySelector('canvas');
-  if (canvas) {
-    // Open a new window to print the QR code
-    const printWindow = window.open('', '', 'width=600,height=600');
-    printWindow.document.write('<html><head><title>Print QR Code</title></head><body>');
-    printWindow.document.write('<h3>QR Code</h3>');
-    printWindow.document.write('<div style="text-align:center;">');
-    printWindow.document.write(canvas.outerHTML);  // Add the QR code canvas to the print window
-    printWindow.document.write('</div></body></html>');
-    printWindow.document.close();
+function printQRCode(canvas) {
+  // Open a new window to print the QR code
+  const printWindow = window.open('', '', 'width=600,height=600');
+  
+  printWindow.document.write('<html><head><title>Print QR Code</title>');
+  printWindow.document.write('<style>body { font-family: Arial, sans-serif; text-align: center; }</style>');
+  printWindow.document.write('</head><body>');
+  printWindow.document.write('<h3>QR Code</h3>');
+  
+  // Append the canvas directly to the print window
+  printWindow.document.body.appendChild(canvas.cloneNode(true));  // Use clone to avoid issues with the original canvas
 
-    // Wait a bit for the window to load, then print
-    printWindow.onload = function () {
-      printWindow.print();
-      printWindow.close();  // Close the print window after printing
-    };
-  } else {
-    alert("QR Code is not generated yet!");
-  }
+  printWindow.document.write('</body></html>');
+  printWindow.document.close();
+
+  // Wait a bit for the window to load, then print
+  printWindow.onload = function () {
+    printWindow.print();
+    printWindow.close();  // Close the print window after printing
+  };
 }
 
 // Event listener for generating the QR code
