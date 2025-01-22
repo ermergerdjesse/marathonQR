@@ -1,42 +1,97 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
-  }
-project {
-    color: #c60000;
-    font-weight: bold;
-  }
-  
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  width: 90%;
+  max-width: 600px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Header */
+.container h1 {
+  font-size: 2rem;
+  color: #4a90e2;
+  margin-bottom: 20px;
+}
+
+/* Form Inputs */
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #555;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Button */
+button {
+  background: #4a90e2;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #357ABD;
+  transform: translateY(-2px);
+}
+
+button:active {
+  background: #2C5E9E;
+  transform: translateY(0);
+}
+
+/* QR Code Display */
+#qr-code {
+  margin-top: 20px;
+  display: inline-block;
+}
+
+#qr-code canvas {
+  margin: 20px 0;
+  border: 1px solid #ccc;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
   .container {
+    padding: 20px;
+  }
+
+  .container h1 {
+    font-size: 1.5rem;
+  }
+
+  button {
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    padding: 15px;
   }
-  
-  #qr-code {
-    margin-top: 20px;
-    display: inline-block;
-  }
-  
-  #qr-code canvas {
-    margin: 20px;
-    border: 1px solid #ccc;
-  }
-
-  @media print {
-    body * {
-      visibility: hidden; /* Hides all useless stuff on print preview */
-    }
-
-    #qr-code, #qr-code * {
-      visibility: visible; /* Shows only the QR code while printing out */
-    }
-
-    #qr-code {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
+}
