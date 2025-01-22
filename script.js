@@ -16,6 +16,12 @@ function generateQRCode(text, firstName, lastName, number) {
     return;
   }
 
+  // Check if the text exceeds 50 characters
+  if (text.length > 50) {
+    alert('Your text is too long to be stamped. Please revise your text for it to fit.');
+    return;
+  }
+
   const canvas = document.createElement('canvas');
   qrCodeDiv.appendChild(canvas); // Append the canvas to the div
 
