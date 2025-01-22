@@ -9,6 +9,7 @@
 <body>
   <div class="container">
     <h1>QR Code Generator and Printer</h1>
+    
     <label for="first-name">First Name:</label><br>
     <input type="text" id="first-name" placeholder="Enter first name" style="width: 80%; padding: 10px;"><br><br>
 
@@ -23,7 +24,9 @@
     <div id="qr-code"></div>
   </div>
 
-  <script src="qrcode.min.js"></script>
+  <!-- Include QRCode.js from a reliable CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <!-- Include main logic -->
   <script src="script.js"></script>
 </body>
 </html>
