@@ -1,15 +1,29 @@
-<div class="container">
-  <h1>QR Code Generator and Printer</h1>
-  <label for="first-name">First Name:</label><br>
-  <input type="text" id="first-name" placeholder="Enter first name" style="width: 80%; padding: 10px;"><br><br>
-  
-  <label for="last-name">Last Name:</label><br>
-  <input type="text" id="last-name" placeholder="Enter last name" style="width: 80%; padding: 10px;"><br><br>
-  
-  <label for="qr-input">Enter text for QR Code:</label><br>
-  <input type="text" id="qr-input" placeholder="Enter text or URL" style="width: 80%; padding: 10px;"><br><br>
-  
-  <button id="generate-btn" style="padding: 10px 20px; cursor: pointer;">Generate QR Code and Print</button>
-  
-  <div id="qr-code"></div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>QR Code Generator and Printer</h1>
+    <label for="first-name">First Name:</label><br>
+    <input type="text" id="first-name" placeholder="Enter first name" style="width: 80%; padding: 10px;"><br><br>
+
+    <label for="last-name">Last Name:</label><br>
+    <input type="text" id="last-name" placeholder="Enter last name" style="width: 80%; padding: 10px;"><br><br>
+
+    <label for="qr-input">Enter text for QR Code:</label><br>
+    <input type="text" id="qr-input" placeholder="Enter text or URL" style="width: 80%; padding: 10px;"><br><br>
+
+    <button id="generate-btn" style="padding: 10px 20px; cursor: pointer;">Generate QR Code and Print</button>
+
+    <div id="qr-code"></div>
+  </div>
+
+  <script src="qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
