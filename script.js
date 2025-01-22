@@ -56,7 +56,6 @@ function printQRCode(canvas, firstName, lastName, number) {
             margin: 0;
           }
           .details {
-            margin-bottom: 10px;
             text-align: center;
           }
           img {
