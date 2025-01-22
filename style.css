@@ -1,4 +1,3 @@
-/* General Styles */
 body {
   font-family: 'Roboto', Arial, sans-serif;
   background: linear-gradient(135deg, #fbeee6, #f4dcd3);
@@ -21,18 +20,16 @@ body {
   text-align: center;
 }
 
-/* Header */
 .container h1 {
   font-size: 2rem;
-  color: #a0041e; /* Dark red */
+  color: #a0041e;
   margin-bottom: 20px;
 }
 
-/* Form Inputs */
 label {
   font-size: 1rem;
   font-weight: bold;
-  color: #a0041e; /* Dark red */
+  color: #a0041e;
 }
 
 input[type="text"] {
@@ -45,9 +42,8 @@ input[type="text"] {
   box-sizing: border-box;
 }
 
-/* Button */
 button {
-  background: #a0041e; /* Dark red */
+  background: #a0041e;
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
@@ -60,16 +56,15 @@ button {
 }
 
 button:hover {
-  background: #8a031b; /* Slightly darker red */
+  background: #8a031b;
   transform: translateY(-2px);
 }
 
 button:active {
-  background: #730315; /* Even darker red */
+  background: #730315;
   transform: translateY(0);
 }
 
-/* QR Code Display */
 #qr-code {
   margin-top: 20px;
   display: inline-block;
@@ -80,7 +75,6 @@ button:active {
   border: 1px solid #ccc;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
   .container {
     padding: 20px;
