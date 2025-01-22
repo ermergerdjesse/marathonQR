@@ -1,41 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QR Code Printer</title>
-  <!-- QR code generator library below, it is safe and reliable -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    #qr-code {
-      margin-top: 20px;
-    }
-    input {
-      padding: 10px;
-      font-size: 16px;
-      width: 300px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Marathon Press QR Generator</h1>
-  <input type="text" id="qr-input" placeholder="Enter text or URL for QR code">
-  <button id="generate-btn"><b>Click here to generate QR</b></button>
+<div class="container">
+  <h1>QR Code Generator and Printer</h1>
+  <label for="first-name">First Name:</label><br>
+  <input type="text" id="first-name" placeholder="Enter first name" style="width: 80%; padding: 10px;"><br><br>
+  
+  <label for="last-name">Last Name:</label><br>
+  <input type="text" id="last-name" placeholder="Enter last name" style="width: 80%; padding: 10px;"><br><br>
+  
+  <label for="qr-input">Enter text for QR Code:</label><br>
+  <input type="text" id="qr-input" placeholder="Enter text or URL" style="width: 80%; padding: 10px;"><br><br>
+  
+  <button id="generate-btn" style="padding: 10px 20px; cursor: pointer;">Generate QR Code and Print</button>
   
   <div id="qr-code"></div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</div>
