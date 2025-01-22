@@ -1,7 +1,7 @@
 /* General Styles */
 body {
   font-family: 'Roboto', Arial, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  background: linear-gradient(135deg, #fbeee6, #f4dcd3);
   color: #333;
   margin: 0;
   padding: 0;
@@ -24,7 +24,7 @@ body {
 /* Header */
 .container h1 {
   font-size: 2rem;
-  color: #4a90e2;
+  color: #a0041e; /* Dark red */
   margin-bottom: 20px;
 }
 
@@ -32,7 +32,7 @@ body {
 label {
   font-size: 1rem;
   font-weight: bold;
-  color: #555;
+  color: #a0041e; /* Dark red */
 }
 
 input[type="text"] {
@@ -47,7 +47,7 @@ input[type="text"] {
 
 /* Button */
 button {
-  background: #4a90e2;
+  background: #a0041e; /* Dark red */
   color: #fff;
   font-size: 1rem;
   font-weight: bold;
@@ -60,12 +60,12 @@ button {
 }
 
 button:hover {
-  background: #357ABD;
+  background: #8a031b; /* Slightly darker red */
   transform: translateY(-2px);
 }
 
 button:active {
-  background: #2C5E9E;
+  background: #730315; /* Even darker red */
   transform: translateY(0);
 }
 
