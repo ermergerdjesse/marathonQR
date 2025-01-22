@@ -1,46 +1,57 @@
 const generateBtn = document.getElementById('generate-btn');
 const qrInput = document.getElementById('qr-input');
+const firstNameInput = document.getElementById('first-name');
+const lastNameInput = document.getElementById('last-name');
 const qrCodeDiv = document.getElementById('qr-code');
 
-// Fuction that generates QR code
-function generateQRCode(text) {
-  qrCodeDiv.innerHTML = ''; // Clears the previous persons information
+// Initialize sequential number
+let sequentialNumber = 1;
 
-// It will not work if no text is entered so no sequence number is randomly created
-  if (!text) {
-    alert('NO TEXT ENTERED, PLEASE ADD TEXT FOR FOIL STAMPER');
+// Function to generate the QR code
+function generateQRCode(text, firstName, lastName, number) {
+  qrCodeDiv.innerHTML = ''; // Clear any previous QR code
+
+  if (!text || !firstName || !lastName) {
+    alert('Please fill out all fields.');
     return;
   }
 
   const canvas = document.createElement('canvas');
-  qrCodeDiv.appendChild(canvas);
+  qrCodeDiv.appendChild(canvas); // Append the canvas to the div
 
   QRCode.toCanvas(canvas, text, { width: 200, height: 200 }, function (error) {
     if (error) {
       console.error('Error generating QR Code:', error);
-      alert('Failed to generate - Ask Jesse');
+      alert('Failed to generate QR code.');
       return;
     }
-    console.log('Foil Stamper QR Generated');
-    printQRCode(canvas); // Calls the print fuction to auto pop-up print properties/windows pop-up
+    console.log('QR code generated!');
+    printQRCode(canvas, firstName, lastName, number); // Call the print function
   });
 }
 
-// Function that prints the QR code only, without having Marathon Press Generator or other items from the site
-function printQRCode(canvas) {
+// Function to print the QR code
+function printQRCode(canvas, firstName, lastName, number) {
   const imageUrl = canvas.toDataURL();
-  const printWindow = window.open('', '', 'width=400,height=400');
+  
+  const printWindow = window.open('', '', 'width=600,height=600');
   printWindow.document.write(`
     <html>
       <head>
         <title>Print QR Code</title>
         <style>
           body {
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
+          }
+          .details {
+            margin-bottom: 20px;
+            text-align: center;
           }
           img {
             border: 1px solid #ccc;
@@ -48,6 +59,11 @@ function printQRCode(canvas) {
         </style>
       </head>
       <body>
+        <div class="details">
+          <h2>First Name: ${firstName}</h2>
+          <h2>Last Name: ${lastName}</h2>
+          <h2>Sequential Number: ${number}</h2>
+        </div>
         <img src="${imageUrl}" alt="QR Code">
       </body>
     </html>
@@ -60,9 +76,14 @@ function printQRCode(canvas) {
   };
 }
 
-// Event listener for QR generation
+// Event listener for generating the QR code
 generateBtn.addEventListener('click', function () {
-  console.log("Generate QR Button Clicked");
   const inputText = qrInput.value.trim();
-  generateQRCode(inputText);
+  const firstName = firstNameInput.value.trim();
+  const lastName = lastNameInput.value.trim();
+
+  generateQRCode(inputText, firstName, lastName, sequentialNumber);
+
+  // Increment the sequential number for the next QR code
+  sequentialNumber += 1;
 });
