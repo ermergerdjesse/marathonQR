@@ -5,7 +5,7 @@
 3. Once connected, load up the iStamp program on the PC desktop
 4. Hit the first row of profiles (two listed, top one is good)
 5. Go to File > Open > Marathon Notebook or something similar, forgot the name
-6. LINE UP LASER TO EDGE OF COVER, the machine is calibrated to stamp where it is needed to, but for lining up the stamping, I made the laser on the edge of the cover to make it easier to line up
+6. LINE UP LASER TO EDGE OF COVER, the machine is calibrated to stamp where it is needed to, but for lining up the stamping, I made the laser on the edge of the cover to make it easier, instead of placing tape or something on the machine to line up.
 
 On the show attendees PC, below is the URL to type in First/Last name, and generates a sequential number everytime the Generate QR button is clicked
 
