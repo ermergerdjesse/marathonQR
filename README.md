@@ -11,8 +11,9 @@ On the show attendees PC, below is the URL to type in First/Last name, and gener
 
 **Site errors that may popup on Foil text**
 
-There is a 50 character limit on any text that is input in the fields. It has a pop-up stating your text is to long, please revise it. The cover I stamped internally has 45 characters so 50 should be fine as it has 0.5" left available to stamp still.
-No label can be generated if first/last name and text is not entered in fields
+1. There is a 50 character limit on any text that is input in the fields. It has a pop-up stating your text is to long, please revise it. The cover I stamped internally has 45 characters so 50 should be fine as it has 0.5" left available to stamp still.
+
+2. No label can be generated if first/last name and text is not entered in fields
 
 **Website to generate QRs,**
 
