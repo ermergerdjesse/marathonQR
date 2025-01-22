@@ -4,26 +4,26 @@ const firstNameInput = document.getElementById('first-name');
 const lastNameInput = document.getElementById('last-name');
 const qrCodeDiv = document.getElementById('qr-code');
 
-// Initialize sequential number
+// Serial number for labels, adds one everytime the generate QR is clicked on
 let sequentialNumber = 1;
 
-// Function to generate the QR code
+// fuction to generate QR code
 function generateQRCode(text, firstName, lastName, number) {
-  qrCodeDiv.innerHTML = ''; // Clear any previous QR code
+  qrCodeDiv.innerHTML = '';
 
   if (!text || !firstName || !lastName) {
     alert('Please fill out all fields.');
     return;
   }
 
-  // Check if the text exceeds 50 characters
+  // Error pops up if the text is over 50 characters
   if (text.length > 50) {
     alert('Your text is too long to be stamped. Please revise your text for it to fit.');
     return;
   }
 
   const canvas = document.createElement('canvas');
-  qrCodeDiv.appendChild(canvas); // Append the canvas to the div
+  qrCodeDiv.appendChild(canvas);
 
   QRCode.toCanvas(canvas, text, { width: 200, height: 200 }, function (error) {
     if (error) {
@@ -32,11 +32,11 @@ function generateQRCode(text, firstName, lastName, number) {
       return;
     }
     console.log('QR code generated!');
-    printQRCode(canvas, firstName, lastName, number); // Call the print function
+    printQRCode(canvas, firstName, lastName, number);
   });
 }
 
-// Function to print the QR code
+// function for Printing QR code
 function printQRCode(canvas, firstName, lastName, number) {
   const imageUrl = canvas.toDataURL();
   
@@ -81,7 +81,6 @@ function printQRCode(canvas, firstName, lastName, number) {
   };
 }
 
-// Event listener for generating the QR code
 generateBtn.addEventListener('click', function () {
   console.log("Generate button clicked!");
   const inputText = qrInput.value.trim();
@@ -90,6 +89,6 @@ generateBtn.addEventListener('click', function () {
 
   generateQRCode(inputText, firstName, lastName, sequentialNumber);
 
-  // Increment the sequential number for the next QR code
+  // adds one to the number everytime again
   sequentialNumber += 1;
 });
