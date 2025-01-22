@@ -78,6 +78,7 @@ function printQRCode(canvas, firstName, lastName, number) {
 
 // Event listener for generating the QR code
 generateBtn.addEventListener('click', function () {
+  console.log("Generate button clicked!");
   const inputText = qrInput.value.trim();
   const firstName = firstNameInput.value.trim();
   const lastName = lastNameInput.value.trim();
