@@ -4,7 +4,7 @@ const firstNameInput = document.getElementById('first-name');
 const lastNameInput = document.getElementById('last-name');
 const qrCodeDiv = document.getElementById('qr-code');
 
-// Serial number for labels, adds one everytime the generate QR is clicked on
+// Serial number for labels, adds one everytime the generate QR is clicked on, Can be reset by make change to js, reset back to 1
 let sequentialNumber = 1;
 
 // fuction to generate QR code
@@ -16,9 +16,9 @@ function generateQRCode(text, firstName, lastName, number) {
     return;
   }
 
-  // Error pops up if the text is over 50 characters
+  // Error pops up if the text is over 50 characters in the input field, just states to revise text
   if (text.length > 50) {
-    alert('Your text is too long to be stamped. Please revise your text for it to fit.');
+    alert('Your text is too long to be stamped. Please revise your text for it to fit 50 characters');
     return;
   }
 
@@ -88,7 +88,6 @@ generateBtn.addEventListener('click', function () {
   const lastName = lastNameInput.value.trim();
 
   generateQRCode(inputText, firstName, lastName, sequentialNumber);
-
-  // adds one to the number everytime again
+  
   sequentialNumber += 1;
 });
