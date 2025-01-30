@@ -55,16 +55,23 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 0;
         padding: 0;
         text-align: center;
-        transform: scale(0.6); /* THIS AUTOMATICALLY SCALES TO 60% */
-        transform-origin: top left;
+        width: 3in;
+        height: 4in; /* Prevents extra blank pages */
+        overflow: hidden; /* Prevents extra space */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
       .print-wrapper {
         width: 3in;
-        height: 4in; /* Prevents extra blank pages */
+        height: 4in;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        transform: scale(0.8); /* Auto-adjusts scaling to fit page width */
+        transform-origin: top center;
       }
       .label-container {
         width: 3in;
@@ -76,7 +83,6 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         text-align: center;
         font-family: Arial, sans-serif;
         font-size: 8pt;
-        position: relative;
       }
       .details h2 {
         font-size: 8pt;
