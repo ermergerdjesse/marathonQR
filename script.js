@@ -24,7 +24,7 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, qrData, { width: 60, height: 60, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
+  QRCode.toCanvas(canvas, qrData, { width: 50, height: 50, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -56,10 +56,11 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         padding: 0;
         text-align: center;
       }
-      .print-container {
-        display: inline-block; /* Ensures no extra blank pages */
-        width: 3in;
-        height: 2in;
+      .print-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       .label-container {
         width: 3in;
@@ -70,20 +71,20 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         justify-content: center;
         text-align: center;
         font-family: Arial, sans-serif;
-        font-size: 7pt;
-        page-break-inside: avoid;
+        font-size: 6pt;
+        page-break-before: avoid; /* Absolutely prevent blank pages */
       }
       .details h2 {
-        font-size: 7pt;
+        font-size: 6pt;
         margin: 2px 0;
       }
       img {
-        width: 0.6in; /* Reduced QR size */
-        height: 0.6in;
+        width: 0.5in; /* Further reduced QR size */
+        height: 0.5in;
       }
     </style>
 
-    <div class="print-container">
+    <div class="print-wrapper">
       <!-- Label 1 -->
       <div class="label-container">
         <div class="details">
@@ -92,9 +93,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         </div>
         <img src="${imageUrl}" alt="QR Code">
       </div>
-    </div>
 
-    <div class="print-container">
       <!-- Label 2 (Ensures Two QR Codes Print, No Blank Pages) -->
       <div class="label-container">
         <div class="details">
