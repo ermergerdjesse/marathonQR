@@ -55,53 +55,54 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 0;
         padding: 0;
         text-align: center;
-        transform: scale(0.7); /* Automatically scales print to 70% */
-        transform-origin: top left;
+      }
+      .print-container {
+        display: inline-block; /* Ensures no extra blank pages */
+        width: 3in;
+        height: 2in;
       }
       .label-container {
-        width: 2.1in; /* 70% of 3in */
-        height: 1.4in; /* 70% of 2in */
+        width: 3in;
+        height: 2in;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-family: Arial, sans-serif;
-        font-size: 7pt; /* Adjusted for 70% scale */
+        font-size: 7pt;
+        page-break-inside: avoid;
       }
       .details h2 {
-        font-size: 7pt; /* Adjusted for 70% scale */
+        font-size: 7pt;
         margin: 2px 0;
       }
       img {
-        width: 0.6in; /* Reduced QR size for 70% scaling */
+        width: 0.6in; /* Reduced QR size */
         height: 0.6in;
-      }
-      /* Strictly control page breaks */
-      .label-container + .label-container {
-        page-break-before: always;
-      }
-      .label-container:last-of-type {
-        page-break-after: auto !important;
       }
     </style>
 
-    <!-- Label 1 -->
-    <div class="label-container">
-      <div class="details">
-        <h2>${firstName} ${lastName}</h2>
-        <h2># ${number}</h2>
+    <div class="print-container">
+      <!-- Label 1 -->
+      <div class="label-container">
+        <div class="details">
+          <h2>${firstName} ${lastName}</h2>
+          <h2># ${number}</h2>
+        </div>
+        <img src="${imageUrl}" alt="QR Code">
       </div>
-      <img src="${imageUrl}" alt="QR Code">
     </div>
 
-    <!-- Label 2 (Ensures Two QR Codes Print, No Blank Pages) -->
-    <div class="label-container">
-      <div class="details">
-        <h2>${firstName} ${lastName}</h2>
-        <h2># ${number}</h2>
+    <div class="print-container">
+      <!-- Label 2 (Ensures Two QR Codes Print, No Blank Pages) -->
+      <div class="label-container">
+        <div class="details">
+          <h2>${firstName} ${lastName}</h2>
+          <h2># ${number}</h2>
+        </div>
+        <img src="${imageUrl}" alt="QR Code">
       </div>
-      <img src="${imageUrl}" alt="QR Code">
     </div>
   `;
 
