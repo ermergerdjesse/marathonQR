@@ -24,7 +24,7 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, qrData, { width: 50, height: 50, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
+  QRCode.toCanvas(canvas, qrData, { width: 38, height: 38, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -55,32 +55,38 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 0;
         padding: 0;
         text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
       }
       .print-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        transform: scale(0.43); /* Scaled down 10% more (Total 43%) */
+        transform-origin: center center;
       }
       .label-container {
-        width: 3in;
-        height: 2in;
+        width: 2.7in; /* 90% of 3in */
+        height: 1.8in; /* 90% of 2in */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-family: Arial, sans-serif;
-        font-size: 6pt;
-        page-break-before: avoid; /* Absolutely prevent blank pages */
+        font-size: 5pt;
+        border: 1px solid transparent; /* Helps with centering */
       }
       .details h2 {
-        font-size: 6pt;
+        font-size: 5pt;
         margin: 2px 0;
       }
       img {
-        width: 0.5in; /* Further reduced QR size */
-        height: 0.5in;
+        width: 0.38in; /* Further reduced QR size */
+        height: 0.38in;
       }
     </style>
 
