@@ -21,9 +21,10 @@ function generateQRCode(text, firstName, lastName, number) {
     return;
   }
 
+  const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, text, { width: 150, height: 150 }, function (error) {
+  QRCode.toCanvas(canvas, qrData, { width: 200, height: 200 }, function (error) {
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -54,43 +55,28 @@ function printQRCode(imageUrl, firstName, lastName, number) {
   printArea.innerHTML = `
     <style>
       @page {
-        size: 2in 1in;
-        margin: 0.25in;
-      }
-      @media print {
-        body * {
-          visibility: hidden;
-        }
-        #print-area, #print-area * {
-          visibility: visible;
-        }
-        #print-area {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-        }
+        size: 3in 2in;
+        margin: 0.5in;
       }
       .label-container {
-        width: 2in;
-        height: 1in;
+        width: 3in;
+        height: 2in;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-family: Arial, sans-serif;
-        font-size: 8pt;
+        font-size: 10pt;
         page-break-after: always;
-        border: 1px solid transparent;
       }
       .details h2 {
-        font-size: 8pt;
+        font-size: 10pt;
         margin: 2px 0;
       }
       img {
-        width: 1in;
-        height: 1in;
+        width: 1.5in;
+        height: 1.5in;
         border: 1px solid #000;
       }
     </style>
@@ -128,10 +114,9 @@ function printQRCode(imageUrl, firstName, lastName, number) {
 
 // Event listener for generating the QR code
 generateBtn.addEventListener('click', function () {
-  console.log("Generate button clicked!");
   const inputText = qrInput.value.trim();
   const firstName = firstNameInput.value.trim();
-  const lastName = lastNameInput.value.trim(); // FIXED: Assigned correctly
+  const lastName = lastNameInput.value.trim();
 
   generateQRCode(inputText, firstName, lastName, sequentialNumber);
 
