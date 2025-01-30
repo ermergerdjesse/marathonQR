@@ -24,32 +24,26 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, qrData, { width: 150, height: 150 }, function (error) { // Adjusted size
+  // Ensuring QR Code Renders Fully Before Printing
+  QRCode.toCanvas(canvas, qrData, { width: 150, height: 150, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
       return;
     }
+
     console.log('QR code generated!');
+    const imageUrl = canvas.toDataURL(); // Convert QR to image
 
-    // Convert the QR code to an image
-    const imageUrl = canvas.toDataURL();
-
-    // Print the QR code labels
-    printQRCode(imageUrl, firstName, lastName, number);
-
-    // Clear input fields after generating the QR code
+    // Small Delay Before Printing for Slower PCs
     setTimeout(() => {
-      qrInput.value = "";
-      firstNameInput.value = "";
-      lastNameInput.value = "";
-    }, 200);
+      printQRCode(imageUrl, firstName, lastName, number);
+    }, 300); 
   });
 }
 
 // Function to print only the QR code labels
 function printQRCode(imageUrl, firstName, lastName, number) {
-  // Create a print-only section
   const printArea = document.createElement('div');
   printArea.id = 'print-area';
   printArea.innerHTML = `
@@ -75,8 +69,8 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 2px 0;
       }
       img {
-        width: 1.25in; /* Adjusted size */
-        height: 1.25in; /* Adjusted size */
+        width: 1.25in; /* Optimized for proper QR visibility */
+        height: 1.25in;
         border: 1px solid #000;
       }
     </style>
@@ -103,11 +97,9 @@ function printQRCode(imageUrl, firstName, lastName, number) {
   // Add the print area to the page
   document.body.appendChild(printArea);
 
-  // Print only the labels
-  window.print();
-
-  // Remove print content after printing
+  // Ensure QR fully renders before printing
   setTimeout(() => {
+    window.print();
     document.body.removeChild(printArea);
   }, 500);
 }
