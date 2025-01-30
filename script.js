@@ -41,7 +41,7 @@ function generateQRCode(text, firstName, lastName, number) {
   });
 }
 
-// Function to print only the QR code labels
+// Function to print two identical QR code labels on separate pages
 function printQRCode(imageUrl, firstName, lastName, number) {
   const printArea = document.createElement('div');
   printArea.id = 'print-area';
@@ -50,6 +50,15 @@ function printQRCode(imageUrl, firstName, lastName, number) {
       @page {
         size: 3in 2in;
         margin: 0.125in;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
       .label-container {
         width: 3in;
@@ -73,6 +82,16 @@ function printQRCode(imageUrl, firstName, lastName, number) {
       }
     </style>
 
+    <!-- Label 1 -->
+    <div class="label-container">
+      <div class="details">
+        <h2>${firstName} ${lastName}</h2>
+        <h2># ${number}</h2>
+      </div>
+      <img src="${imageUrl}" alt="QR Code">
+    </div>
+
+    <!-- Label 2 (Identical to Label 1, Ensures Two QR Codes Print) -->
     <div class="label-container">
       <div class="details">
         <h2>${firstName} ${lastName}</h2>
@@ -82,13 +101,17 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     </div>
   `;
 
+  // Add the print area to the page
   document.body.appendChild(printArea);
+
+  // Ensure QR fully renders before printing
   setTimeout(() => {
     window.print();
     document.body.removeChild(printArea);
   }, 500);
 }
 
+// Event listener for generating the QR code
 generateBtn.addEventListener('click', function () {
   generateQRCode(qrInput.value.trim(), firstNameInput.value.trim(), lastNameInput.value.trim(), sequentialNumber);
   sequentialNumber += 1;
