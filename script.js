@@ -9,7 +9,7 @@ function printQRCode(canvas, firstName, lastName, number) {
     return;
   }
 
-  // Load content inside the new window
+  // Ensure the new window loads content properly
   printWindow.document.open();
   printWindow.document.write(`
     <html>
@@ -48,15 +48,13 @@ function printQRCode(canvas, firstName, lastName, number) {
           <h2># ${number}</h2>
         </div>
         <img src="${imageUrl}" alt="QR Code">
+        <script>
+          window.onload = function() {
+            window.print();
+          };
+        </script>
       </body>
     </html>
   `);
   printWindow.document.close();
-
-  // Ensure the window fully loads before printing
-  printWindow.onload = function () {
-    setTimeout(() => {
-      printWindow.print();
-    }, 500);
-  };
 }
