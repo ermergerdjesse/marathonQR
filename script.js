@@ -49,22 +49,28 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     <style>
       @page {
         size: 3in 2in;
-        margin: 0.125in;
+        margin: 0;
       }
       body {
         margin: 0;
         padding: 0;
         text-align: center;
-        overflow: hidden; /* THIS FIX REMOVES THE EXTRA PAGE */
+        width: 3in;
+        height: 6in; /* STRICTLY LIMIT PRINT AREA */
+        overflow: hidden; /* CUTS OFF ANY EXTRA CONTENT */
+        display: grid; /* ENSURES NO EXTRA SPACE */
+        grid-template-rows: 3in 3in; /* FORCES TWO LABELS, NO BLANK PAGE */
       }
       .print-wrapper {
         width: 3in;
-        height: 4in; /* Prevents third blank page */
-        overflow: hidden; /* THIS ENSURES NOTHING PRINTS BEYOND TWO PAGES */
+        height: 6in; /* Matches the exact space for two labels */
+        display: grid;
+        grid-template-rows: 3in 3in;
+        position: relative;
       }
       .label-container {
         width: 3in;
-        height: 2in;
+        height: 3in; /* Makes sure both labels fit */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -75,10 +81,10 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         position: absolute;
       }
       .label-1 {
-        top: 0; /* First label at the top */
+        top: 0;
       }
       .label-2 {
-        top: 2in; /* Second label placed exactly below the first */
+        top: 3in; /* EXACTLY below the first label */
       }
       .details h2 {
         font-size: 8pt;
