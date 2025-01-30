@@ -32,8 +32,11 @@ function generateQRCode(text, firstName, lastName, number) {
     }
     console.log('QR code generated!');
 
+    // Convert the QR code to an image
+    const imageUrl = canvas.toDataURL();
+
     // Print the QR code once it is generated
-    printQRCode(canvas, firstName, lastName, number);
+    printQRCode(imageUrl, firstName, lastName, number);
 
     // Clear input fields after generating the QR code
     setTimeout(() => {
@@ -45,9 +48,7 @@ function generateQRCode(text, firstName, lastName, number) {
 }
 
 // Function to print the QR code (shows two identical labels)
-function printQRCode(canvas, firstName, lastName, number) {
-  const imageUrl = canvas.toDataURL();
-
+function printQRCode(imageUrl, firstName, lastName, number) {
   // Open a new print preview window
   let printWindow = window.open('', '_blank');
 
