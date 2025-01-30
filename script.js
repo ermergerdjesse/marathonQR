@@ -66,6 +66,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         text-align: center;
         font-family: Arial, sans-serif;
         font-size: 10pt;
+        page-break-after: avoid;
       }
       .details h2 {
         font-size: 10pt;
@@ -91,7 +92,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     </div>
 
     <!-- Label 2 (Ensures Two QR Codes Print, No Blank Pages) -->
-    <div class="label-container">
+    <div class="label-container" style="page-break-before: always;">
       <div class="details">
         <h2>${firstName} ${lastName}</h2>
         <h2># ${number}</h2>
