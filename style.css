@@ -21,33 +21,6 @@ body {
   text-align: center;
 }
 
-/* Header */
-h1 {
-  font-size: 2rem;
-  color: #a0041e;
-  margin-bottom: 20px;
-}
-
-/* Form Inputs */
-label {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #a0041e;
-  display: block;
-  margin-bottom: 5px;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-  box-sizing: border-box;
-  text-align: center;
-}
-
 /* Button */
 button {
   background: #a0041e;
@@ -58,7 +31,6 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
   transition: background 0.3s ease, transform 0.2s ease;
   width: 100%;
   max-width: 250px;
@@ -67,9 +39,25 @@ button {
 
 button:hover {
   background: #8a031b;
-  transform:
+  transform: translateY(-2px);
 }
-@page {
-  size: 2in 1in;
-  margin: 0.25in;
+
+/* Print Styling */
+@media print {
+  @page {
+    size: 3in 2in;
+    margin: 0.5in;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #print-area, #print-area * {
+    visibility: visible;
+  }
+  #print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
