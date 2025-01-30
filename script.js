@@ -25,7 +25,7 @@ function generateQRCode(text, firstName, lastName, number) {
   const canvas = document.createElement('canvas');
 
   // Ensure QR Code Renders Properly
-  QRCode.toCanvas(canvas, qrData, { width: 150, height: 150, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
+  QRCode.toCanvas(canvas, qrData, { width: 120, height: 120, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -52,6 +52,15 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         size: 3in 2in;
         margin: 0.5in;
       }
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
       .label-container {
         width: 3in;
         height: 2in;
@@ -69,8 +78,8 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 2px 0;
       }
       img {
-        width: 1.25in; /* Adjusted for proper QR visibility */
-        height: 1.25in;
+        width: 1in; /* Adjusted for proper QR visibility */
+        height: 1in;
       }
     </style>
 
