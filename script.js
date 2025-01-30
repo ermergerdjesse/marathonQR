@@ -32,6 +32,11 @@ function generateQRCode(text, firstName, lastName, number) {
     }
     console.log('QR code generated!');
     printQRCode(canvas, firstName, lastName, number); // Call the print function
+
+    // Clear input fields after generating the QR code
+    qrInput.value = "";
+    firstNameInput.value = "";
+    lastNameInput.value = "";
   });
 }
 
@@ -39,6 +44,7 @@ function generateQRCode(text, firstName, lastName, number) {
 function printQRCode(canvas, firstName, lastName, number) {
   const imageUrl = canvas.toDataURL();
 
+  // Open the print window
   let printWindow = window.open('', '_blank', 'width=600,height=400');
 
   if (!printWindow) {
@@ -46,11 +52,16 @@ function printQRCode(canvas, firstName, lastName, number) {
     return;
   }
 
+  // Write content into the print window
   printWindow.document.write(`
     <html>
       <head>
         <title>Print QR Code</title>
         <style>
+          @page {
+            size: auto;
+            margin: 10px;
+          }
           body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -68,14 +79,29 @@ function printQRCode(canvas, firstName, lastName, number) {
         </style>
       </head>
       <body>
-        <div class="details">
-          <h2>First: ${firstName}</h2>
-          <h2>Last: ${lastName}</h2>
-          <h2># ${number}</h2>
+        <div class="print-area">
+          <div class="details">
+            <h2>First: ${firstName}</h2>
+            <h2>Last: ${lastName}</h2>
+            <h2># ${number}</h2>
+          </div>
+          <img src="${imageUrl}" alt="QR Code">
         </div>
-        <img src="${imageUrl}" alt="QR Code">
+        
+        <div class="print-area">
+          <div class="details">
+            <h2>First: ${firstName}</h2>
+            <h2>Last: ${lastName}</h2>
+            <h2># ${number}</h2>
+          </div>
+          <img src="${imageUrl}" alt="QR Code">
+        </div>
+
         <script>
-          setTimeout(() => { window.print(); }, 500);
+          window.onload = function() {
+            window.print();
+            setTimeout(() => { window.close(); }, 500);
+          };
         </script>
       </body>
     </html>
