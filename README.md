@@ -20,6 +20,8 @@ On the show attendees PC, below is the URL to type in First/Last name, and gener
 
 2. No label can be generated if first/last name and text is not entered in fields
 
+3. They have to fill in First and Last name. This is due to matching their cover/sequence number to the cover that is foil stamped and binned
+
 **Website to generate QRs,**
 
 https://ermergerdjesse.github.io/marathonQR/
