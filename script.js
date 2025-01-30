@@ -57,16 +57,19 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         size: 2in 1in;
         margin: 0.25in;
       }
-      body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        font-size: 8pt;
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #print-area, #print-area * {
+          visibility: visible;
+        }
+        #print-area {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+        }
       }
       .label-container {
         width: 2in;
@@ -76,6 +79,8 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         align-items: center;
         justify-content: center;
         text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 8pt;
         page-break-after: always;
         border: 1px solid transparent;
       }
@@ -126,7 +131,7 @@ generateBtn.addEventListener('click', function () {
   console.log("Generate button clicked!");
   const inputText = qrInput.value.trim();
   const firstName = firstNameInput.value.trim();
-  const lastName = lastNameInput.value.trim();
+  const lastNameInput.value.trim();
 
   generateQRCode(inputText, firstName, lastName, sequentialNumber);
 
