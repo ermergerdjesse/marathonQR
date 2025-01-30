@@ -68,3 +68,8 @@ button {
 button:hover {
   background: #8a031b;
   transform:
+}
+@page {
+  size: 2in 1in;
+  margin: 0.25in;
+}
