@@ -94,7 +94,7 @@ button:hover {
 @media print {
   @page {
     size: 3in 2in;
-    margin: 0.5in;
+    margin: 0.125in;
   }
   body * {
     visibility: hidden;
