@@ -41,7 +41,7 @@ function generateQRCode(text, firstName, lastName, number) {
   });
 }
 
-// Function to print two identical QR code labels on separate pages
+// Function to print only the QR code labels without blank pages
 function printQRCode(imageUrl, firstName, lastName, number) {
   const printArea = document.createElement('div');
   printArea.id = 'print-area';
@@ -54,10 +54,6 @@ function printQRCode(imageUrl, firstName, lastName, number) {
       body {
         margin: 0;
         padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
         text-align: center;
       }
       .label-container {
@@ -70,7 +66,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         text-align: center;
         font-family: Arial, sans-serif;
         font-size: 10pt;
-        page-break-after: always;
+        page-break-after: avoid;
       }
       .details h2 {
         font-size: 10pt;
@@ -92,7 +88,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     </div>
 
     <!-- Label 2 (Identical to Label 1, Ensures Two QR Codes Print) -->
-    <div class="label-container">
+    <div class="label-container" style="page-break-before: always;">
       <div class="details">
         <h2>${firstName} ${lastName}</h2>
         <h2># ${number}</h2>
