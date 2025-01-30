@@ -31,7 +31,7 @@ function generateQRCode(text, firstName, lastName, number) {
       return;
     }
 
-    console.log('QR code generated!");
+    console.log("QR code generated!");
     const imageUrl = canvas.toDataURL(); // Convert QR to image
 
     // Small Delay Before Printing for Slower PCs
