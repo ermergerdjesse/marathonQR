@@ -66,6 +66,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         text-align: center;
         font-family: Arial, sans-serif;
         font-size: 8pt;
+        page-break-inside: avoid;
       }
       .details h2 {
         font-size: 8pt;
@@ -75,12 +76,12 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         width: 0.7in;
         height: 0.7in;
       }
-      /* Fix to prevent blank pages */
-      .label-container {
-        page-break-after: always;
+      /* Strictly control page breaks */
+      .label-container + .label-container {
+        page-break-before: always;
       }
       .label-container:last-of-type {
-        page-break-after: avoid !important; /* Prevents extra blank page */
+        page-break-after: auto !important; /* Prevents extra blank page */
       }
     </style>
 
