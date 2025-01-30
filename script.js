@@ -32,10 +32,8 @@ function generateQRCode(text, firstName, lastName, number) {
     }
     console.log('QR code generated!');
     
-    // Call print function AFTER clearing fields
     printQRCode(canvas, firstName, lastName, number);
 
-    // Clear input fields after generating the QR code
     setTimeout(() => {
       qrInput.value = "";
       firstNameInput.value = "";
@@ -48,90 +46,29 @@ function generateQRCode(text, firstName, lastName, number) {
 function printQRCode(canvas, firstName, lastName, number) {
   const imageUrl = canvas.toDataURL();
 
-  // Use the same window to prevent extra popups
-  let printWindow = window.open('', '_blank');
+  const printContent = `
+    <div class="print-page">
+      <div class="details">
+        <h2>First: ${firstName}</h2>
+        <h2>Last: ${lastName}</h2>
+        <h2># ${number}</h2>
+      </div>
+      <img src="${imageUrl}" alt="QR Code">
+    </div>
+    <div class="print-page">
+      <div class="details">
+        <h2>First: ${firstName}</h2>
+        <h2>Last: ${lastName}</h2>
+        <h2># ${number}</h2>
+      </div>
+      <img src="${imageUrl}" alt="QR Code">
+    </div>
+  `;
 
-  if (!printWindow) {
-    alert("Popup blocked! Please enable pop-ups for this site.");
-    return;
-  }
-
-  // Write content for 3" x 2" label with 0.5" margins
-  printWindow.document.write(`
-    <html>
-      <head>
-        <title>Print QR Code</title>
-        <style>
-          @page {
-            size: 3in 2in;
-            margin: 0.5in;
-          }
-          body {
-            width: 3in;
-            height: 2in;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            font-size: 10pt;
-            margin: 0;
-            padding: 0;
-          }
-          .details {
-            margin-bottom: 5px;
-          }
-          .details h2 {
-            font-size: 10pt;
-            margin: 2px 0;
-          }
-          img {
-            width: 1.5in;
-            height: 1.5in;
-            border: 1px solid #000;
-          }
-        </style>
-      </head>
-      <body>
-        <div class="print-page">
-          <div class="details">
-            <h2>First: ${firstName}</h2>
-            <h2>Last: ${lastName}</h2>
-            <h2># ${number}</h2>
-          </div>
-          <img src="${imageUrl}" alt="QR Code">
-        </div>
-
-        <div class="print-page" style="page-break-before: always;">
-          <div class="details">
-            <h2>First: ${firstName}</h2>
-            <h2>Last: ${lastName}</h2>
-            <h2># ${number}</h2>
-          </div>
-          <img src="${imageUrl}" alt="QR Code">
-        </div>
-
-        <script>
-          window.onload = function() {
-            window.print();
-          };
-        </script>
-      </body>
-    </html>
-  `);
-  printWindow.document.close();
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write(printContent);
+  newWindow.document.close();
+  newWindow.onload = function () {
+    newWindow.print();
+  };
 }
-
-// Event listener for generating the QR code
-generateBtn.addEventListener('click', function () {
-  console.log("Generate button clicked!");
-  const inputText = qrInput.value.trim();
-  const firstName = firstNameInput.value.trim();
-  const lastName = lastNameInput.value.trim();
-
-  generateQRCode(inputText, firstName, lastName, sequentialNumber);
-
-  // Increment the sequential number for the next QR code
-  sequentialNumber += 1;
-});
