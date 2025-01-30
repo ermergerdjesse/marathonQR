@@ -24,8 +24,8 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  // Ensuring QR Code Renders Fully Before Printing
-  QRCode.toCanvas(canvas, qrData, { width: 150, height: 150, errorCorrectionLevel: 'H' }, function (error) { 
+  // Ensure QR Code Renders Properly
+  QRCode.toCanvas(canvas, qrData, { width: 150, height: 150, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -38,7 +38,7 @@ function generateQRCode(text, firstName, lastName, number) {
     // Small Delay Before Printing for Slower PCs
     setTimeout(() => {
       printQRCode(imageUrl, firstName, lastName, number);
-    }, 300); 
+    }, 300);
   });
 }
 
@@ -69,9 +69,8 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 2px 0;
       }
       img {
-        width: 1.25in; /* Optimized for proper QR visibility */
+        width: 1.25in; /* Adjusted for proper QR visibility */
         height: 1.25in;
-        border: 1px solid #000;
       }
     </style>
 
