@@ -66,18 +66,18 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         text-align: center;
         font-family: Arial, sans-serif;
         font-size: 10pt;
-        page-break-after: always;
-      }
-      .label-container:last-of-type {
-        page-break-after: avoid;
       }
       .details h2 {
         font-size: 10pt;
         margin: 2px 0;
       }
       img {
-        width: 0.9in; /* Slightly reduced to eliminate blank page */
+        width: 0.9in;
         height: 0.9in;
+      }
+      /* Fix to prevent blank pages */
+      .label-container:last-of-type {
+        page-break-after: auto !important;
       }
     </style>
 
