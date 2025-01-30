@@ -55,22 +55,20 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 0;
         padding: 0;
         text-align: center;
-        width: 3in;
-        height: 6in; /* STRICTLY LIMIT PRINT AREA */
-        overflow: hidden; /* CUTS OFF ANY EXTRA CONTENT */
-        display: grid; /* ENSURES NO EXTRA SPACE */
-        grid-template-rows: 3in 3in; /* FORCES TWO LABELS, NO BLANK PAGE */
+        transform: scale(0.6); /* THIS AUTOMATICALLY SCALES TO 60% */
+        transform-origin: top left;
       }
       .print-wrapper {
         width: 3in;
-        height: 6in; /* Matches the exact space for two labels */
-        display: grid;
-        grid-template-rows: 3in 3in;
-        position: relative;
+        height: 4in; /* Prevents extra blank pages */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       .label-container {
         width: 3in;
-        height: 3in; /* Makes sure both labels fit */
+        height: 2in;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -78,13 +76,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         text-align: center;
         font-family: Arial, sans-serif;
         font-size: 8pt;
-        position: absolute;
-      }
-      .label-1 {
-        top: 0;
-      }
-      .label-2 {
-        top: 3in; /* EXACTLY below the first label */
+        position: relative;
       }
       .details h2 {
         font-size: 8pt;
@@ -98,7 +90,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
 
     <div class="print-wrapper">
       <!-- Label 1 -->
-      <div class="label-container label-1">
+      <div class="label-container">
         <div class="details">
           <h2>${firstName} ${lastName}</h2>
           <h2># ${number}</h2>
@@ -107,7 +99,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
       </div>
 
       <!-- Label 2 -->
-      <div class="label-container label-2">
+      <div class="label-container">
         <div class="details">
           <h2>${firstName} ${lastName}</h2>
           <h2># ${number}</h2>
