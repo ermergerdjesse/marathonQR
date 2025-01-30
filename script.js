@@ -24,7 +24,7 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, qrData, { width: 38, height: 38, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
+  QRCode.toCanvas(canvas, qrData, { width: 50, height: 50, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -55,44 +55,44 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 0;
         padding: 0;
         text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
+        position: relative;
       }
       .print-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        transform: scale(0.43); /* Scaled down 10% more (Total 43%) */
-        transform-origin: center center;
+        width: 3in;
+        height: 4in; /* Prevents third blank page */
+        position: relative;
       }
       .label-container {
-        width: 2.7in; /* 90% of 3in */
-        height: 1.8in; /* 90% of 2in */
+        width: 3in;
+        height: 2in;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-family: Arial, sans-serif;
-        font-size: 5pt;
-        border: 1px solid transparent; /* Helps with centering */
+        font-size: 8pt;
+        position: absolute;
+      }
+      .label-1 {
+        top: 0; /* First label at the top */
+      }
+      .label-2 {
+        top: 2in; /* Second label placed exactly below the first */
       }
       .details h2 {
-        font-size: 5pt;
+        font-size: 8pt;
         margin: 2px 0;
       }
       img {
-        width: 0.38in; /* Further reduced QR size */
-        height: 0.38in;
+        width: 0.75in;
+        height: 0.75in;
       }
     </style>
 
     <div class="print-wrapper">
       <!-- Label 1 -->
-      <div class="label-container">
+      <div class="label-container label-1">
         <div class="details">
           <h2>${firstName} ${lastName}</h2>
           <h2># ${number}</h2>
@@ -100,8 +100,8 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         <img src="${imageUrl}" alt="QR Code">
       </div>
 
-      <!-- Label 2 (Ensures Two QR Codes Print, No Blank Pages) -->
-      <div class="label-container">
+      <!-- Label 2 -->
+      <div class="label-container label-2">
         <div class="details">
           <h2>${firstName} ${lastName}</h2>
           <h2># ${number}</h2>
