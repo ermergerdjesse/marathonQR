@@ -24,8 +24,7 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  // Ensure QR Code Renders Properly
-  QRCode.toCanvas(canvas, qrData, { width: 120, height: 120, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
+  QRCode.toCanvas(canvas, qrData, { width: 100, height: 100, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -50,16 +49,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     <style>
       @page {
         size: 3in 2in;
-        margin: 0.5in;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
+        margin: 0.125in;
       }
       .label-container {
         width: 3in;
@@ -78,21 +68,11 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 2px 0;
       }
       img {
-        width: 1in; /* Adjusted for proper QR visibility */
+        width: 1in;
         height: 1in;
       }
     </style>
 
-    <!-- Label 1 -->
-    <div class="label-container">
-      <div class="details">
-        <h2>${firstName} ${lastName}</h2>
-        <h2># ${number}</h2>
-      </div>
-      <img src="${imageUrl}" alt="QR Code">
-    </div>
-
-    <!-- Label 2 (Identical to Label 1) -->
     <div class="label-container">
       <div class="details">
         <h2>${firstName} ${lastName}</h2>
@@ -102,24 +82,14 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     </div>
   `;
 
-  // Add the print area to the page
   document.body.appendChild(printArea);
-
-  // Ensure QR fully renders before printing
   setTimeout(() => {
     window.print();
     document.body.removeChild(printArea);
   }, 500);
 }
 
-// Event listener for generating the QR code
 generateBtn.addEventListener('click', function () {
-  const inputText = qrInput.value.trim();
-  const firstName = firstNameInput.value.trim();
-  const lastName = lastNameInput.value.trim();
-
-  generateQRCode(inputText, firstName, lastName, sequentialNumber);
-
-  // Increment the sequential number for the next QR code
+  generateQRCode(qrInput.value.trim(), firstNameInput.value.trim(), lastNameInput.value.trim(), sequentialNumber);
   sequentialNumber += 1;
 });
