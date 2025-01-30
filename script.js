@@ -24,7 +24,7 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, qrData, { width: 70, height: 70, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
+  QRCode.toCanvas(canvas, qrData, { width: 60, height: 60, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -55,33 +55,34 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 0;
         padding: 0;
         text-align: center;
+        transform: scale(0.7); /* Automatically scales print to 70% */
+        transform-origin: top left;
       }
       .label-container {
-        width: 3in;
-        height: 2in;
+        width: 2.1in; /* 70% of 3in */
+        height: 1.4in; /* 70% of 2in */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-family: Arial, sans-serif;
-        font-size: 8pt;
-        page-break-inside: avoid;
+        font-size: 7pt; /* Adjusted for 70% scale */
       }
       .details h2 {
-        font-size: 8pt;
+        font-size: 7pt; /* Adjusted for 70% scale */
         margin: 2px 0;
       }
       img {
-        width: 0.7in;
-        height: 0.7in;
+        width: 0.6in; /* Reduced QR size for 70% scaling */
+        height: 0.6in;
       }
       /* Strictly control page breaks */
       .label-container + .label-container {
         page-break-before: always;
       }
       .label-container:last-of-type {
-        page-break-after: auto !important; /* Prevents extra blank page */
+        page-break-after: auto !important;
       }
     </style>
 
