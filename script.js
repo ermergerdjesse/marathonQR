@@ -31,12 +31,16 @@ function generateQRCode(text, firstName, lastName, number) {
       return;
     }
     console.log('QR code generated!');
-    printQRCode(canvas, firstName, lastName, number); // Call the print function
+    
+    // Call print function AFTER clearing fields
+    printQRCode(canvas, firstName, lastName, number);
 
     // Clear input fields after generating the QR code
-    qrInput.value = "";
-    firstNameInput.value = "";
-    lastNameInput.value = "";
+    setTimeout(() => {
+      qrInput.value = "";
+      firstNameInput.value = "";
+      lastNameInput.value = "";
+    }, 100);
   });
 }
 
@@ -44,42 +48,53 @@ function generateQRCode(text, firstName, lastName, number) {
 function printQRCode(canvas, firstName, lastName, number) {
   const imageUrl = canvas.toDataURL();
 
-  // Open the print window
-  let printWindow = window.open('', '_blank', 'width=600,height=400');
+  // Use the same window to prevent extra popups
+  let printWindow = window.open('', '_blank');
 
   if (!printWindow) {
     alert("Popup blocked! Please enable pop-ups for this site.");
     return;
   }
 
-  // Write content into the print window
+  // Write content for 3" x 2" label with 0.5" margins
   printWindow.document.write(`
     <html>
       <head>
         <title>Print QR Code</title>
         <style>
           @page {
-            size: auto;
-            margin: 10px;
+            size: 3in 2in;
+            margin: 0.5in;
           }
           body {
-            font-family: Arial, sans-serif;
+            width: 3in;
+            height: 2in;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
+          }
+          .details {
+            margin-bottom: 5px;
           }
           .details h2 {
-            font-size: 14pt;
-            margin: 5px 0;
+            font-size: 10pt;
+            margin: 2px 0;
           }
           img {
-            width: 150px;
-            height: 150px;
+            width: 1.5in;
+            height: 1.5in;
             border: 1px solid #000;
           }
         </style>
       </head>
       <body>
-        <div class="print-area">
+        <div class="print-page">
           <div class="details">
             <h2>First: ${firstName}</h2>
             <h2>Last: ${lastName}</h2>
@@ -87,8 +102,8 @@ function printQRCode(canvas, firstName, lastName, number) {
           </div>
           <img src="${imageUrl}" alt="QR Code">
         </div>
-        
-        <div class="print-area">
+
+        <div class="print-page" style="page-break-before: always;">
           <div class="details">
             <h2>First: ${firstName}</h2>
             <h2>Last: ${lastName}</h2>
@@ -100,7 +115,6 @@ function printQRCode(canvas, firstName, lastName, number) {
         <script>
           window.onload = function() {
             window.print();
-            setTimeout(() => { window.close(); }, 500);
           };
         </script>
       </body>
