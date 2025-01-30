@@ -24,7 +24,7 @@ function generateQRCode(text, firstName, lastName, number) {
   const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, qrData, { width: 100, height: 100, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
+  QRCode.toCanvas(canvas, qrData, { width: 90, height: 90, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -66,6 +66,9 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         text-align: center;
         font-family: Arial, sans-serif;
         font-size: 10pt;
+        page-break-after: always;
+      }
+      .label-container:last-of-type {
         page-break-after: avoid;
       }
       .details h2 {
@@ -73,8 +76,8 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 2px 0;
       }
       img {
-        width: 1in;
-        height: 1in;
+        width: 0.9in; /* Slightly reduced to eliminate blank page */
+        height: 0.9in;
       }
     </style>
 
@@ -87,8 +90,8 @@ function printQRCode(imageUrl, firstName, lastName, number) {
       <img src="${imageUrl}" alt="QR Code">
     </div>
 
-    <!-- Label 2 (Identical to Label 1, Ensures Two QR Codes Print) -->
-    <div class="label-container" style="page-break-before: always;">
+    <!-- Label 2 (Ensures Two QR Codes Print, No Blank Pages) -->
+    <div class="label-container">
       <div class="details">
         <h2>${firstName} ${lastName}</h2>
         <h2># ${number}</h2>
