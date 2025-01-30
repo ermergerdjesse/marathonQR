@@ -22,7 +22,6 @@ function generateQRCode(text, firstName, lastName, number) {
   }
 
   const canvas = document.createElement('canvas');
-  qrCodeDiv.appendChild(canvas); // Append the canvas to the div
 
   QRCode.toCanvas(canvas, text, { width: 180, height: 180 }, function (error) {
     if (error) {
@@ -35,8 +34,8 @@ function generateQRCode(text, firstName, lastName, number) {
     // Convert the QR code to an image
     const imageUrl = canvas.toDataURL();
 
-    // Insert the print content directly into the page and trigger print
-    insertPrintContent(imageUrl, firstName, lastName, number);
+    // Print the QR code labels
+    printQRCode(imageUrl, firstName, lastName, number);
 
     // Clear input fields after generating the QR code
     setTimeout(() => {
@@ -47,28 +46,22 @@ function generateQRCode(text, firstName, lastName, number) {
   });
 }
 
-// Function to insert the print layout directly into the current page
-function insertPrintContent(imageUrl, firstName, lastName, number) {
+// Function to print only the QR code labels
+function printQRCode(imageUrl, firstName, lastName, number) {
+  // Create a print-only section
   const printArea = document.createElement('div');
   printArea.id = 'print-area';
   printArea.innerHTML = `
     <style>
       @page {
         size: 3in 2in;
-        margin: 0;
+        margin: 0.5in;
       }
       body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        font-size: 10pt;
         margin: 0;
         padding: 0;
       }
-      .print-page {
+      .label-container {
         width: 3in;
         height: 2in;
         display: flex;
@@ -76,7 +69,13 @@ function insertPrintContent(imageUrl, firstName, lastName, number) {
         align-items: center;
         justify-content: center;
         text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 10pt;
         page-break-after: always;
+        border: 1px solid transparent; /* Ensures layout consistency */
+      }
+      .details {
+        margin-bottom: 5px;
       }
       .details h2 {
         font-size: 10pt;
@@ -90,7 +89,7 @@ function insertPrintContent(imageUrl, firstName, lastName, number) {
     </style>
 
     <!-- Label 1 -->
-    <div class="print-page">
+    <div class="label-container">
       <div class="details">
         <h2>First: ${firstName}</h2>
         <h2>Last: ${lastName}</h2>
@@ -100,7 +99,7 @@ function insertPrintContent(imageUrl, firstName, lastName, number) {
     </div>
 
     <!-- Label 2 (Identical to Label 1) -->
-    <div class="print-page">
+    <div class="label-container">
       <div class="details">
         <h2>First: ${firstName}</h2>
         <h2>Last: ${lastName}</h2>
@@ -110,14 +109,16 @@ function insertPrintContent(imageUrl, firstName, lastName, number) {
     </div>
   `;
 
-  // Append to body and trigger print
+  // Add the print area to the page
   document.body.appendChild(printArea);
+
+  // Print only the labels
   window.print();
 
   // Remove print content after printing
   setTimeout(() => {
     document.body.removeChild(printArea);
-  }, 1000);
+  }, 500);
 }
 
 // Event listener for generating the QR code
