@@ -131,7 +131,7 @@ generateBtn.addEventListener('click', function () {
   console.log("Generate button clicked!");
   const inputText = qrInput.value.trim();
   const firstName = firstNameInput.value.trim();
-  const lastNameInput.value.trim();
+  const lastName = lastNameInput.value.trim(); // FIXED: Assigned correctly
 
   generateQRCode(inputText, firstName, lastName, sequentialNumber);
 
