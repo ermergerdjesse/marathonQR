@@ -10,16 +10,24 @@
 <body>
   <div class="container">
     <h1>QR Code Generator and Printer</h1>
-    <label for="first-name">First Name:</label><br>
-    <input type="text" id="first-name" placeholder="Enter first name"><br><br>
-    <label for="last-name">Last Name:</label><br>
-    <input type="text" id="last-name" placeholder="Enter last name"><br><br>
-    <label for="qr-input">Enter text for QR Code (Max 50 characters):</label><br>
-    <input type="text" id="qr-input" maxlength="50" placeholder="Enter text or URL"><br><br>
+    
+    <label for="first-name">First Name:</label>
+    <input type="text" id="first-name" placeholder="Enter first name"><br>
+
+    <label for="last-name">Last Name:</label>
+    <input type="text" id="last-name" placeholder="Enter last name"><br>
+
+    <label for="qr-input">Enter text for QR Code (Max 50 characters):</label>
+    <input type="text" id="qr-input" maxlength="50" placeholder="Enter text or URL"><br>
+
     <button id="generate-btn">Generate QR Code and Print</button>
+
     <div id="qr-code"></div>
   </div>
+
+  <!-- Load QR Code Generator -->
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <!-- Load main script -->
   <script src="script.js"></script>
 </body>
 </html>
