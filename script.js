@@ -55,12 +55,12 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         margin: 0;
         padding: 0;
         text-align: center;
-        position: relative;
+        overflow: hidden; /* THIS FIX REMOVES THE EXTRA PAGE */
       }
       .print-wrapper {
         width: 3in;
         height: 4in; /* Prevents third blank page */
-        position: relative;
+        overflow: hidden; /* THIS ENSURES NOTHING PRINTS BEYOND TWO PAGES */
       }
       .label-container {
         width: 3in;
