@@ -23,7 +23,7 @@ function generateQRCode(text, firstName, lastName, number) {
 
   const canvas = document.createElement('canvas');
 
-  QRCode.toCanvas(canvas, text, { width: 180, height: 180 }, function (error) {
+  QRCode.toCanvas(canvas, text, { width: 150, height: 150 }, function (error) {
     if (error) {
       console.error('Error generating QR Code:', error);
       alert('Failed to generate QR code.');
@@ -54,36 +54,38 @@ function printQRCode(imageUrl, firstName, lastName, number) {
   printArea.innerHTML = `
     <style>
       @page {
-        size: 3in 2in;
-        margin: 0.5in;
+        size: 2in 1in;
+        margin: 0.25in;
       }
       body {
         margin: 0;
         padding: 0;
-      }
-      .label-container {
-        width: 3in;
-        height: 2in;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
         font-family: Arial, sans-serif;
-        font-size: 10pt;
-        page-break-after: always;
-        border: 1px solid transparent; /* Ensures layout consistency */
+        font-size: 8pt;
       }
-      .details {
-        margin-bottom: 5px;
+      .label-container {
+        width: 2in;
+        height: 1in;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        page-break-after: always;
+        border: 1px solid transparent;
       }
       .details h2 {
-        font-size: 10pt;
+        font-size: 8pt;
         margin: 2px 0;
       }
       img {
-        width: 1.5in;
-        height: 1.5in;
+        width: 1in;
+        height: 1in;
         border: 1px solid #000;
       }
     </style>
@@ -91,8 +93,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     <!-- Label 1 -->
     <div class="label-container">
       <div class="details">
-        <h2>First: ${firstName}</h2>
-        <h2>Last: ${lastName}</h2>
+        <h2>${firstName} ${lastName}</h2>
         <h2># ${number}</h2>
       </div>
       <img src="${imageUrl}" alt="QR Code">
@@ -101,8 +102,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
     <!-- Label 2 (Identical to Label 1) -->
     <div class="label-container">
       <div class="details">
-        <h2>First: ${firstName}</h2>
-        <h2>Last: ${lastName}</h2>
+        <h2>${firstName} ${lastName}</h2>
         <h2># ${number}</h2>
       </div>
       <img src="${imageUrl}" alt="QR Code">
