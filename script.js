@@ -1,5 +1,5 @@
 const generateBtn = document.getElementById('generate-btn');
-const qrInput = document.getElementById('qr-input');
+const qrInput = document.getElementById('qr-input'); // Foil Text Input
 const firstNameInput = document.getElementById('first-name');
 const lastNameInput = document.getElementById('last-name');
 const qrCodeDiv = document.getElementById('qr-code');
@@ -8,20 +8,21 @@ const qrCodeDiv = document.getElementById('qr-code');
 let sequentialNumber = 1;
 
 // Function to generate the QR code
-function generateQRCode(text, firstName, lastName, number) {
+function generateQRCode(foilText, firstName, lastName, number) {
   qrCodeDiv.innerHTML = ''; // Clear any previous QR code
 
-  if (!text || !firstName || !lastName) {
+  if (!foilText || !firstName || !lastName) {
     alert('Please fill out all fields.');
     return;
   }
 
-  if (text.length > 50) {
+  if (foilText.length > 50) {
     alert('Your text is too long to be stamped. Please revise your text for it to fit.');
     return;
   }
 
-  const qrData = `Name: ${firstName} ${lastName} | ${text} | #${number}`;
+  // The QR Code will contain ONLY the foil text (not first name, last name, or sequence number)
+  const qrData = foilText;
   const canvas = document.createElement('canvas');
 
   QRCode.toCanvas(canvas, qrData, { width: 50, height: 50, margin: 0, errorCorrectionLevel: 'H' }, function (error) { 
@@ -36,13 +37,13 @@ function generateQRCode(text, firstName, lastName, number) {
 
     // Small Delay Before Printing for Slower PCs
     setTimeout(() => {
-      printQRCode(imageUrl, firstName, lastName, number);
+      printQRCode(imageUrl, firstName, lastName, number, foilText);
     }, 300);
   });
 }
 
 // Function to print only the QR code labels without blank pages
-function printQRCode(imageUrl, firstName, lastName, number) {
+function printQRCode(imageUrl, firstName, lastName, number, foilText) {
   const printArea = document.createElement('div');
   printArea.id = 'print-area';
   printArea.innerHTML = `
@@ -100,6 +101,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         <div class="details">
           <h2>${firstName} ${lastName}</h2>
           <h2># ${number}</h2>
+          <h2>Foil Text: ${foilText}</h2>
         </div>
         <img src="${imageUrl}" alt="QR Code">
       </div>
@@ -109,6 +111,7 @@ function printQRCode(imageUrl, firstName, lastName, number) {
         <div class="details">
           <h2>${firstName} ${lastName}</h2>
           <h2># ${number}</h2>
+          <h2>Foil Text: ${foilText}</h2>
         </div>
         <img src="${imageUrl}" alt="QR Code">
       </div>
